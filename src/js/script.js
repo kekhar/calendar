@@ -1,14 +1,7 @@
-// Функция для расчета дней до лета
 document.addEventListener('DOMContentLoaded', () => {
 	const countdownElement = document.getElementById('countdown');
 	if (countdownElement) {
-	  const today = new Date();
-	  const summerStart = new Date(today.getFullYear(), 5, 1);
-	  if (today > summerStart) {
-	    summerStart.setFullYear(summerStart.getFullYear() + 1);
-	  }
-	  const daysUntilSummer = Math.ceil((summerStart - today) / (1000 * 60 * 60 * 24));
-	  countdownElement.textContent = `До лета осталось ${daysUntilSummer} дней`;
+	  calculateWorkingDaysToSummerFromToday();
 	}
    });
    
@@ -26,6 +19,31 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
    }
    
+   // Функция для расчета рабочих дней до лета от текущей даты
+   async function calculateWorkingDaysToSummerFromToday() {
+	const today = new Date();
+	const summerStart = new Date(today.getFullYear(), 5, 1);
+
+	if (today > summerStart) {
+	  summerStart.setFullYear(summerStart.getFullYear() + 1);
+	}
+   
+	let workingDays = 0;
+	const holidays = await getHolidays(today.getFullYear(), 'RU');
+   
+	for (let date = new Date(today); date < summerStart; date.setDate(date.getDate() + 1)) {
+	  const day = date.getDay();
+	  const isHoliday = holidays.some(holiday => holiday.toDateString() === date.toDateString());
+   
+	  if (day !== 0 && day !== 6 && !isHoliday) {
+	    workingDays++;
+	  }
+	}
+
+	const countdownElement = document.getElementById('countdown');
+	countdownElement.textContent = `До лета осталось ${workingDays} рабочих дней.`;
+   }
+   
    // Функция для расчета рабочих дней до лета от выбранной даты
    async function calculateWorkingDaysToSummer() {
 	const startDate = new Date(document.getElementById('startDate').value);
@@ -37,16 +55,16 @@ document.addEventListener('DOMContentLoaded', () => {
    
 	let workingDays = 0;
 	const holidays = await getHolidays(startDate.getFullYear(), 'RU');
-   
+
 	for (let date = new Date(startDate); date < summerStart; date.setDate(date.getDate() + 1)) {
 	  const day = date.getDay();
 	  const isHoliday = holidays.some(holiday => holiday.toDateString() === date.toDateString());
    
 	  if (day !== 0 && day !== 6 && !isHoliday) {
 	    workingDays++;
-	  }	
+	  }
 	}
-   
+
 	const resultElement = document.getElementById('result');
 	resultElement.textContent = `От выбранной даты до лета ${workingDays} рабочих дней.`;
    }
