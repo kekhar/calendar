@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Расчет дней до лета от выбранной даты</title>
+    <link rel="stylesheet" href="./src/css/style.css" />
+    <script src="./src/js/script.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <h1>Расчет рабочих дней до начала лета от выбранной даты</h1>
+    <input type="date" id="startDate" />
+    <button onclick="calculateWorkingDaysToSummer()">
+      Рассчитать рабочие дни
+    </button>
+    <p id="result"></p>
+    <a href="index.html">Вернуться к обратному отсчету до лета</a>
+  </body>
+</html>
