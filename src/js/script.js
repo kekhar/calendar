@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	const countdownElement = document.getElementById('countdown');
-	countdownElement.textContent = `До лета осталось ${workingDays} рабочих дней.`;
+	countdownElement.textContent = `До лета осталось ${workingDays} рабочих дней`;
    }
    
    // Функция для расчета рабочих дней до лета от выбранной даты
@@ -66,6 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	const resultElement = document.getElementById('result');
-	resultElement.textContent = `От выбранной даты до лета ${workingDays} рабочих дней.`;
+	resultElement.textContent = `От выбранной даты до лета ${workingDays} рабочих дней`;
    }
    
